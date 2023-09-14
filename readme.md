@@ -1,7 +1,7 @@
 # Module
 
-- ID: codesmash-aws-serverless-cicd
-- NAME: CodeSmash AWS Serverless CICD
+- ID: codesmash-aws-serverless-pipeline-github
+- NAME: CodeSmash AWS Serverless Pipeline GitHub
 
 # Intro
 
