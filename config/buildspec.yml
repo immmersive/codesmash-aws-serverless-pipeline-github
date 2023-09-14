@@ -1,0 +1,24 @@
+version: 0.2
+
+env:    
+  variables:
+    bucket: "$bucket"
+    region: "$region"
+    key: "$key"
+    branch: "$branch"
+    cicd_name: "$cicd_name"
+    connection_arn: "$connection_arn"
+    repo_name: "$repo_name"
+    repo_branch: "$repo_branch"    
+
+phases:
+  build:
+    commands:
+
+      - curl -o terraform_1.5.5_linux_arm64.zip https://releases.hashicorp.com/terraform/1.5.5/terraform_1.5.5_linux_arm64.zip
+      - unzip terraform_1.5.5_linux_arm64.zip
+      - chmod 755 terraform
+      - printf 'yes' | ./terraform init -backend-config="bucket=$bucket" -backend-config="region=$region" -backend-config="key=$key"
+      - ./terraform workspace list      
+      - ./terraform workspace select $branch || ./terraform workspace new $branch
+      - ./terraform apply --auto-approve -var "repo_branch=$repo_name" -var "repo_branch=$repo_branch" -var "cicd_name=$cicd_name" -var "connection_arn=$connection_arn" -var "bucket=$bucket" -var "region=$region"
