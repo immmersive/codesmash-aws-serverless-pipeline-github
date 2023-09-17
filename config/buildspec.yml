@@ -21,4 +21,4 @@ phases:
       - printf 'yes' | ./terraform init -backend-config="bucket=$bucket" -backend-config="region=$region" -backend-config="key=$key"
       - ./terraform workspace list      
       - ./terraform workspace select $branch || ./terraform workspace new $branch
-      - ./terraform apply --auto-approve -var "repo_branch=$repo_name" -var "repo_branch=$repo_branch" -var "cicd_name=$cicd_name" -var "connection_arn=$connection_arn" -var "bucket=$bucket" -var "region=$region"
+      - ./terraform apply --auto-approve -var "repo_name=$repo_name" -var "repo_branch=$repo_branch" -var "cicd_name=$cicd_name" -var "connection_arn=$connection_arn" -var "bucket=$bucket" -var "region=$region"
